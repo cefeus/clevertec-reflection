@@ -1,7 +1,7 @@
 package config.db;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import util.PropertiesUtil;
+import util.ReadProperties;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
@@ -27,11 +27,11 @@ public class C3p0Configuration {
      * загружает необходимые параметры для пула соединений
      */
     private void loadProperties() {
-        connPool.setJdbcUrl(PropertiesUtil.getPropertyByKey(URL));
-        connPool.setUser(PropertiesUtil.getPropertyByKey(USERNAME));
-        connPool.setPassword(PropertiesUtil.getPropertyByKey(PASSWORD));
+        connPool.setJdbcUrl(ReadProperties.getPropertyByKey(URL));
+        connPool.setUser(ReadProperties.getPropertyByKey(USERNAME));
+        connPool.setPassword(ReadProperties.getPropertyByKey(PASSWORD));
         try {
-            connPool.setDriverClass(PropertiesUtil.getPropertyByKey(DRIVER));
+            connPool.setDriverClass(ReadProperties.getPropertyByKey(DRIVER));
         } catch (PropertyVetoException e) {
             throw new RuntimeException(e);
         }
