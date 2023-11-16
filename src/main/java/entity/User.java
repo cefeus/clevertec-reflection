@@ -9,6 +9,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@ToString
 public class User {
 
     private UUID id;

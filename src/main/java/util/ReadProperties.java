@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * класс для работы с yaml файлом
  */
-public class PropertiesUtil {
+public class ReadProperties {
     private static final Properties PROP = new Properties();
 
     static {
@@ -18,7 +18,7 @@ public class PropertiesUtil {
      * метод для выгрузки yaml файла
      */
     private static void loadProperties() {
-        try (InputStream input = PropertiesUtil.class.
+        try (InputStream input = ReadProperties.class.
                 getClassLoader().
                 getResourceAsStream("application.yml")) {
             PROP.load(input);

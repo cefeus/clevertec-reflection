@@ -28,8 +28,8 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public Optional<User> get(User user) {
-        try(var statement = prepare(SQL_GET_USER_BY_ID, user.getId())){
+    public Optional<User> get(UUID id) {
+        try(var statement = prepare(SQL_GET_USER_BY_ID, id)){
             try (var rs = statement.executeQuery()) {
                 return rs.first()
                         ? Optional.of(buildUser(rs))
@@ -70,8 +70,8 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public void delete(User user) {
-        try(var statement = prepare(SQL_DELETE_USER, user.getId())) {
+    public void delete(UUID id) {
+        try(var statement = prepare(SQL_DELETE_USER, id)) {
             var rs = statement.executeUpdate();
             if (rs != 1){
                 throw new RuntimeException("Unable delete user");
