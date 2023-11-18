@@ -1,12 +1,11 @@
 package cache.impl;
 
-import cache.Cache;
+import cache.ICache;
 import cache.LinkedHashMapWithCapacity;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public class LRUCache<K,V> implements Cache<K,V> {
+public class LRUCache<K,V> implements ICache<K,V> {
 
     private final LinkedHashMapWithCapacity<K, V> map;
 

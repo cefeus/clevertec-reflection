@@ -1,12 +1,12 @@
 package cache.impl;
 
-import cache.Cache;
+import cache.ICache;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 
-public class LFUCache<K,V> implements Cache<K,V> {
+public class LFUCache<K,V> implements ICache<K,V> {
 
     HashMap<K, V> values;
     HashMap<K, Integer> callCount;
