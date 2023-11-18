@@ -23,22 +23,33 @@ ext {
     set("lombokVersion", "1.18.28")
     set("mapstructVersion","1.5.5.Final")
     set("aspectjVersion", "1.9.8")
+    set("javaxValidationVersion", "2.0.1.Final")
+    set("jacksonVersion","2.15.2")
+    set("hibernateValidatorVersion", "6.2.5.Final")
 }
 
 dependencies {
     implementation("org.postgresql:postgresql:${postgresqlVersion}")
-    implementation("com.mchange:c3p0:${c3p0Version}")
 
-    compileOnly("org.projectlombok:lombok:${lombokVersion}")
-    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    implementation("com.mchange:c3p0:${c3p0Version}")
 
     implementation "org.aspectj:aspectjrt:${aspectjVersion}"
     implementation "org.aspectj:aspectjweaver:${aspectjVersion}"
     implementation "org.aspectj:aspectjtools:${aspectjVersion}"
 
+    implementation "javax.validation:validation-api:${javaxValidationVersion}"
+    implementation 'javax.el:javax.el-api:3.0.0'
+    implementation 'org.glassfish:javax.el:3.0.0'
+
+
+
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
+
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'

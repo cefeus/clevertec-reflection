@@ -18,7 +18,6 @@ public class CasheAspect {
     public Optional<User> aroundGet(ProceedingJoinPoint joinPoint) throws Throwable {
         Optional<User> user = cache.get(joinPoint.getArgs()[0]);
         Object[] args = joinPoint.getArgs();
-        System.out.println(args[0].toString());
         if (user.isEmpty()) {
             user = (Optional<User>) joinPoint.proceed(joinPoint.getArgs());
             if (user.isPresent())

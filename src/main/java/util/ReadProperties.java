@@ -20,7 +20,7 @@ public class ReadProperties {
     private static void loadProperties() {
         try (InputStream input = ReadProperties.class.
                 getClassLoader().
-                getResourceAsStream("application.yml")) {
+                getResourceAsStream("application.yaml")) {
             PROP.load(input);
         } catch (IOException e) {
             e.printStackTrace();

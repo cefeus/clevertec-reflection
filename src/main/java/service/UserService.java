@@ -8,12 +8,12 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserDto get(UUID uuid);
+    UserDto get(UUID id);
 
     List<UserDto> getAll();
 
     void create(UserDto productDto);
 
-    void update(UUID uuid, UserDto productDto);
-    void delete(UUID uuid);
+    void update(UUID id, UserDto productDto);
+    void delete(UUID id);
 }

@@ -6,10 +6,8 @@ import dto.UserDto;
 import entity.User;
 import mapper.UserMapper;
 import mapper.UserMapperImpl;
-import proxy.DaoProxy;
 import service.UserService;
 
-import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,8 +20,8 @@ public class UserServiceImpl implements UserService {
 
     //return some empty filled with non exist values object
     @Override
-    public UserDto get(UUID uuid) {
-        Optional<User> received = userDao.get(uuid);
+    public UserDto get(UUID id) {
+        Optional<User> received = userDao.get(id);
         return mapper.toUserDto(received.get());
     }
 
@@ -42,14 +40,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UUID uuid, UserDto userDto) {
+    public void update(UUID id, UserDto userDto) {
         User user = mapper.toUser(userDto);
-        user.setId(uuid);
+        user.setId(id);
         userDao.save(user);
     }
 
     @Override
-    public void delete(UUID uuid) {
-        userDao.delete(uuid);
+    public void delete(UUID id) {
+        userDao.delete(id);
     }
 }
