@@ -5,57 +5,64 @@ import cache.Cache;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.UUID;
 
-public class LFUCache<T> implements Cache<T> {
+public class LFUCache<K,V> implements Cache<K,V> {
 
-    HashMap<UUID, T> vals;
-    HashMap<UUID, Integer> counts;
-    HashMap<Integer, LinkedHashSet<UUID>> lists;
+    HashMap<K, V> values;
+    HashMap<K, Integer> callCount;
+    HashMap<Integer, LinkedHashSet<K>> callCountsLists;
     int capacity;
     int min = -1;
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
-        vals = new HashMap<>();
-        counts = new HashMap<>();
-        lists = new HashMap<>();
-        lists.put(1, new LinkedHashSet<>());
+        values = new HashMap<>();
+        callCount = new HashMap<>();
+        callCountsLists = new HashMap<>();
+        callCountsLists.put(1, new LinkedHashSet<>());
     }
 
-    public Optional<T> get(UUID key) {
-        if (!vals.containsKey(key))
+    public Optional<V> get(K key) {
+        if (!values.containsKey(key))
             return  Optional.empty();
 
-        int count = counts.get(key);
-        counts.put(key, count + 1);
-        lists.get(count).remove(key);
-        if (count == min && lists.get(count).isEmpty())
+        int count = callCount.get(key);
+        callCount.put(key, count + 1);
+        callCountsLists.get(count).remove(key);
+        if (count == min && callCountsLists.get(count).isEmpty())
             min++;
-        if (!lists.containsKey(count + 1))
-            lists.put(count + 1, new LinkedHashSet<>());
-        lists.get(count + 1).add(key);
-        return Optional.of(vals.get(key));
+        if (!callCountsLists.containsKey(count + 1))
+            callCountsLists.put(count + 1, new LinkedHashSet<>());
+        callCountsLists.get(count + 1).add(key);
+        return Optional.of(values.get(key));
     }
 
-    public void put(UUID key, T value) {
+    public void put(K key, V value) {
         if (capacity <= 0) {
             return;
         }
-        if (vals.containsKey(key)) {
-            vals.put(key, value);
+        if (values.containsKey(key)) {
+            values.put(key, value);
             get(key);
             return;
         }
-        if (vals.size() >= capacity) {
-            UUID evit = lists.get(min).iterator().next();
-            lists.get(min).remove(evit);
-            vals.remove(evit);
-            counts.remove(evit);
+        if (values.size() >= capacity) {
+            K evit = callCountsLists.get(min).iterator().next();
+            callCountsLists.get(min).remove(evit);
+            values.remove(evit);
+            callCount.remove(evit);
         }
-        vals.put(key, value);
-        counts.put(key, 1);
+        values.put(key, value);
+        callCount.put(key, 1);
         min = 1;
-        lists.get(1).add(key);
+        callCountsLists.get(1).add(key);
+    }
+
+    @Override
+    public void pop(K key) {
+        values.remove(key);
+        int count = callCount.get(key);
+        callCountsLists.get(count).remove(key);
+        callCount.remove(key);
     }
 }
