@@ -7,13 +7,10 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static util.constants.DatabaseConstants.DRIVER;
-import static util.constants.DatabaseConstants.PASSWORD;
-import static util.constants.DatabaseConstants.URL;
-import static util.constants.DatabaseConstants.USERNAME;
+import static util.constants.DatabaseConstants.*;
 
 /**
- * Конфигурационный класс для пула соединений
+ * Config class for connection pool
  */
 public class C3p0Configuration {
     private final ComboPooledDataSource connPool;
@@ -24,7 +21,7 @@ public class C3p0Configuration {
     }
 
     /**
-     * загружает необходимые параметры для пула соединений
+     * Loads all needed for connection pool parameters
      */
     private void loadProperties() {
         connPool.setJdbcUrl(ReadProperties.getPropertyByKey(URL));
@@ -38,7 +35,8 @@ public class C3p0Configuration {
     }
 
     /**
-     * метод, который открывает соединение
+     * Method to open new connection
+     *
      * @return Connection
      * @throws SQLException
      */
@@ -46,7 +44,11 @@ public class C3p0Configuration {
         return connPool.getConnection();
     }
 
+    /**
+     * Method to close existing connection
+     */
     public void close() {
         connPool.close();
     }
+
 }

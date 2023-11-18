@@ -2,6 +2,9 @@ package util.constants;
 
 import lombok.experimental.UtilityClass;
 
+/**
+ * Utility class containing constants related to database configuration.
+ */
 @UtilityClass
 public class DatabaseConstants {
 

@@ -9,19 +9,20 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     /**
-     * Маппит DTO в пользователя без UUID
+     * Maps DTO to user without UUID
      *
-     * @param userDto - DTO для маппинга
-     * @return новый пользователь
+     * @param userDto - DTO for mapping
+     * @return new user
      */
     @Mapping(target = "id", ignore = true)
     User toUser(UserDto userDto);
 
     /**
-     * Маппит пользователя в DTO без UUID
+     * Maps user to DTO without UUID
      *
-     * @param user - пользователь для маппинга
-     * @return новое DTO
+     * @param user - user for mapping
+     * @return new DTO
      */
     UserDto toUserDto(User user);
+
 }

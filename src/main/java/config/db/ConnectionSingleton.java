@@ -1,12 +1,14 @@
 package config.db;
 
 /**
- * Создание синглтона соединения с БД
+ * Creation of database singletone connection
  */
 public class ConnectionSingleton {
+
     private static volatile C3p0Configuration connection;
 
-    private ConnectionSingleton() {}
+    private ConnectionSingleton() {
+    }
 
     public static C3p0Configuration getConnection() {
         if (connection == null) {
@@ -17,4 +19,5 @@ public class ConnectionSingleton {
         }
         return connection;
     }
+
 }

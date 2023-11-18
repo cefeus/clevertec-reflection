@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 
-public class LFUCache<K,V> implements ICache<K,V> {
+public class LFUCache<K, V> implements ICache<K, V> {
 
     HashMap<K, V> values;
     HashMap<K, Integer> callCount;
@@ -22,9 +22,15 @@ public class LFUCache<K,V> implements ICache<K,V> {
         callCountsLists.put(1, new LinkedHashSet<>());
     }
 
+    /**
+     * Retrieves the value associated with the provided key from the cache.
+     *
+     * @param key The key whose associated value is to be retrieved.
+     * @return Optional containing the value associated with the key if present, else empty Optional.
+     */
     public Optional<V> get(K key) {
         if (!values.containsKey(key))
-            return  Optional.empty();
+            return Optional.empty();
 
         int count = callCount.get(key);
         callCount.put(key, count + 1);
@@ -37,6 +43,13 @@ public class LFUCache<K,V> implements ICache<K,V> {
         return Optional.of(values.get(key));
     }
 
+    /**
+     * Inserts the key-value pair into the cache.
+     * If the key already exists, updates the value.
+     *
+     * @param key   The key to be inserted or updated.
+     * @param value The value associated with the key.
+     */
     public void put(K key, V value) {
         if (capacity <= 0) {
             return;
@@ -58,6 +71,11 @@ public class LFUCache<K,V> implements ICache<K,V> {
         callCountsLists.get(1).add(key);
     }
 
+    /**
+     * Removes the entry associated with the provided key from the cache.
+     *
+     * @param key The key of the entry to be removed.
+     */
     @Override
     public void pop(K key) {
         values.remove(key);
@@ -65,4 +83,5 @@ public class LFUCache<K,V> implements ICache<K,V> {
         callCountsLists.get(count).remove(key);
         callCount.remove(key);
     }
+
 }
