@@ -58,8 +58,8 @@ public class UserDao implements Dao<User> {
     @Override
     public void save(User user) {
         try(var statement = user.getId() == null
-                ? prepare(SQL_CREATE_USER, user.getName(), user.getSurname(), user.getEmail(), user.getEmail())
-                : prepare(SQL_UPDATE_USER, user.getName(), user.getSurname(), user.getEmail(), user.getEmail(), user.getId())){
+                ? prepare(SQL_CREATE_USER, user.getName(), user.getSurname(), user.getEmail(), user.getAge())
+                : prepare(SQL_UPDATE_USER, user.getName(), user.getSurname(), user.getEmail(), user.getAge(), user.getId())){
             var rs = statement.executeUpdate();
             if (rs != 1){
                 throw new RuntimeException("Unable to save or update");
