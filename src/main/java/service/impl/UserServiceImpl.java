@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
-    private final Dao<User> userDao = (Dao<User>) Proxy.newProxyInstance(UserServiceImpl.class.getClassLoader(), new Class[]{Dao.class}, new DaoProxy(new UserDao()));
+    private final Dao<User> userDao = new UserDao();
     private final UserMapper mapper = new UserMapperImpl();
 
     //return some empty filled with non exist values object

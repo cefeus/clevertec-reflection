@@ -87,8 +87,8 @@ public class UserDao implements Dao<User> {
                 query,
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_UPDATABLE);
-        for (int i = 1; i < params.length; i++) {
-            statement.setObject(i, params[i]);
+        for (int i = 0; i < params.length; i++) {
+            statement.setObject(i+1, params[i]);
         }
         return statement;
         } catch (SQLException e) {
