@@ -20,6 +20,7 @@ ext {
     set("postgresqlVersion", "42.2.27")
     set("c3p0Version", "0.9.2.1")
     set("lombokVersion", "1.18.28")
+    set("mapstructVersion","1.5.5.Final")
 }
 
 dependencies {
@@ -28,6 +29,10 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok:${lombokVersion}")
     annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'

@@ -4,6 +4,8 @@ import dao.Dao;
 import dao.impl.UserDao;
 import dto.UserDto;
 import entity.User;
+import mapper.UserMapper;
+import mapper.UserMapperImpl;
 import proxy.DaoProxy;
 import service.UserService;
 
@@ -15,36 +17,35 @@ import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
-    private static Dao userDao = (Dao) Proxy.newProxyInstance(UserServiceImpl.class.getClassLoader(), new Class[]{ Dao.class }, new DaoProxy(new UserDao()));
+    private final Dao<User> userDao = (Dao<User>) Proxy.newProxyInstance(UserServiceImpl.class.getClassLoader(), new Class[]{Dao.class}, new DaoProxy(new UserDao()));
+    private final UserMapper mapper = new UserMapperImpl();
 
-
+    //return some empty filled with non exist values object
     @Override
     public UserDto get(UUID uuid) {
         Optional<User> received = userDao.get(uuid);
-        //mapping
-        return new UserDto();
+        return mapper.toUserDto(received.get());
     }
 
     @Override
     public List<UserDto> getAll() {
-        List received = userDao.getAll();
-        return received.stream().map(
-                // mapping
-        ).collect(Collectors.toList());
+        List<User> received = userDao.getAll();
+        return received.stream()
+                .map(u -> mapper.toUserDto((User) u))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void create(UserDto userDto) {
-        User user;
-        //map dto to user
+        User user = mapper.toUser(userDto);
         userDao.save(user);
     }
 
     @Override
     public void update(UUID uuid, UserDto userDto) {
-        User user;
-        // map dto to user and set uuid
-        userDao.save();
+        User user = mapper.toUser(userDto);
+        user.setId(uuid);
+        userDao.save(user);
     }
 
     @Override
