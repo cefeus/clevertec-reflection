@@ -26,6 +26,8 @@ ext {
     set("javaxValidationVersion", "2.0.1.Final")
     set("jacksonVersion","2.15.2")
     set("hibernateValidatorVersion", "6.2.5.Final")
+    set("javaxElVersion","3.0.0")
+    set("mockitoVersion","5.6.0")
 }
 
 dependencies {
@@ -38,10 +40,8 @@ dependencies {
     implementation "org.aspectj:aspectjtools:${aspectjVersion}"
 
     implementation "javax.validation:validation-api:${javaxValidationVersion}"
-    implementation 'javax.el:javax.el-api:3.0.0'
-    implementation 'org.glassfish:javax.el:3.0.0'
-
-
+    implementation "javax.el:javax.el-api:${javaxElVersion}"
+    implementation "org.glassfish:javax.el:${javaxElVersion}"
 
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}"
@@ -50,7 +50,10 @@ dependencies {
 
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    testImplementation 'org.projectlombok:lombok:1.18.28'
 
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+    testImplementation 'org.assertj:assertj-core:3.24.2'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }

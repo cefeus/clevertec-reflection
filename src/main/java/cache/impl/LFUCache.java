@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public class LFUCache<K, V> implements ICache<K, V> {
 
-    HashMap<K, V> values;
-    HashMap<K, Integer> callCount;
-    HashMap<Integer, LinkedHashSet<K>> callCountsLists;
+    private final HashMap<K, V> values;
+    private final HashMap<K, Integer> callCount;
+    private final HashMap<Integer, LinkedHashSet<K>> callCountsLists;
     int capacity;
     int min = -1;
 
