@@ -26,12 +26,14 @@ ext {
     set("javaxValidationVersion", "2.0.1.Final")
     set("jacksonVersion","2.15.2")
     set("hibernateValidatorVersion", "6.2.5.Final")
+    set("flywayCoreVersion", "9.21.1")
     set("javaxElVersion","3.0.0")
     set("mockitoVersion","5.6.0")
 }
 
 dependencies {
     implementation("org.postgresql:postgresql:${postgresqlVersion}")
+    implementation("org.flywaydb:flyway-core:${flywayCoreVersion}")
 
     implementation("com.mchange:c3p0:${c3p0Version}")
 
