@@ -9,7 +9,7 @@ public class Main {
     private static final String JSON_USER = "{\"name\":\"Peter\",\"surname\":\"Parker\",\"email\":\"peterparker@gmail.com\",\"age\":25}";
     private static final String JSON_UPDATE_USER = "{\"name\":\"Petr\",\"surname\":\"Park\",\"email\":\"peterp@gmail.com\",\"age\":25}";
     private static final String XML_UPDATE_USER = "<UserDto><name>Petr</name><surname>Parer</surname><email>peter@gmail.com</email><age>24</age></UserDto>";
-    private static final String EXISTING_UUID = "1bbfdbf6-dc0d-4443-9e5d-3c3325d51490";
+    private static final String EXISTING_UUID = "2565d11d-b07d-4049-a24f-40e7a9d2ff3b";
     private static final UUID ID = UUID.fromString(EXISTING_UUID);
 
     public static void main(String[] args) {
