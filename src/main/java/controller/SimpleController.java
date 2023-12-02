@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import service.UserService;
 import service.impl.UserServiceImpl;
 import validation.Validator;
+import writer.impl.UserPdfWriterImpl;
 
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ public class SimpleController {
     private UserService service;
     private ObjectMapper jsonMapper;
     private XmlMapper xmlMapper;
+    private UserPdfWriterImpl writer = new UserPdfWriterImpl();
 
     public SimpleController() {
         service = new UserServiceImpl();
@@ -33,6 +35,7 @@ public class SimpleController {
     @SneakyThrows(JsonProcessingException.class)
     public String get(UUID id) {
         var user = service.get(id);
+        writer.print(user, "user.pdf");
         return jsonMapper.writeValueAsString(user);
     }
 
@@ -45,6 +48,7 @@ public class SimpleController {
     @SneakyThrows(JsonProcessingException.class)
     public String getAll() {
         var users = service.getAll();
+        writer.print(users, "users.pdf");
         return jsonMapper.writeValueAsString(users);
     }
 

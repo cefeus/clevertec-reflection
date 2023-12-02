@@ -6,6 +6,7 @@ import entity.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import util.ReadProperties;
 
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Aspect
 public class CasheAspect {
 
-    private final ICache cache = new Cache().getCache();
+    private final ICache cache = Cache.getCache(ReadProperties.getPropertyByKey("CACHE"));
 
     /**
      * Intercepts the 'get' method in UserDao to check and retrieve data from the cache if available.
