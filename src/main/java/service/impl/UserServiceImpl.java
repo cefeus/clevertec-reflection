@@ -4,6 +4,7 @@ import dao.Dao;
 import dao.impl.UserDao;
 import dto.UserDto;
 import entity.User;
+import exception.UserNotFoundException;
 import mapper.UserMapper;
 import mapper.UserMapperImpl;
 import service.UserService;
